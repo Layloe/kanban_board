@@ -12,21 +12,20 @@ export default class Column {
         this.elements.root = Column.createRoot()
         this.elements.title = this.elements.root.querySelector(".kanban__column-title")
         this.elements.items = this.elements.root.querySelector(".kanban__column-items")
-        this.elements.addItem = this.elements.root.querySelector(".kanban__add-items")
+        this.elements.addItem = this.elements.root.querySelector(".kanban__add-item")
 
         this.elements.root.dataset.id = id
         this.elements.title.textContent = title
         
         this.elements.items.appendChild(topDropZone)
 
-        this.elements.addItem.addEventListener("click",
-        () =>  {
+        this.elements.addItem.addEventListener("click", 
+        () => {
             const newItem = KanbanAPI.insertItem(id, "")
             this.renderItem(newItem)
         }
         )
     }
-
     static createRoot() {
         const range = document.createRange()
 
@@ -43,6 +42,7 @@ export default class Column {
     }
 
     renderItem(data) {
+        console.log(data.id, data.content)
         const item = new Item(data.id, data.content)
         this.elements.items.appendChild(item.elements.root)
     }
